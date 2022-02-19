@@ -12,28 +12,27 @@ export default function SurveyStepper() {
   const steps = survey.questions;
   const activeQuestion = activeStep !== steps.length ? steps[activeStep] : undefined;
   const { count } = useCountDown(activeQuestion?.lifetimeSeconds);
-
-  useEffect(() => {
-    if (count === 0 && activeStep !== steps.length) {
-      handleNext();
-
-      const { answers } = userAnswers;
-      if (answers[activeStep] === undefined) {
-        answers.splice(activeStep, 1, -1);
-        setUserAnswers({
-          ...userAnswers,
-          answers
-        });
+  
+    useEffect(() => {
+      if (count === 0 && activeStep !== steps.length) {
+        handleNext();
       }
+    }, [count]);
+
+  const saveAnswer = () => {
+    const { answers } = userAnswers;
+    if (answers[activeStep] === undefined) {
+      answers.splice(activeStep, 1, 0);
+      setUserAnswers({
+        ...userAnswers,
+        answers
+      });
     }
-  }, [count]);
+  }
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
+    saveAnswer();
   };
 
   return (

@@ -13,7 +13,7 @@ export default function SurveyPresentation() {
   const handleStart = () => {
     setUserAnswers({
       ...userAnswers,
-      surveyId: 0, // or identifier for Survey
+      surveyId: survey.id,
       status:'inProgress'
     });
   };

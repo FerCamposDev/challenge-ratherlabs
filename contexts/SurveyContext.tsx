@@ -2,6 +2,7 @@ import { ReactNode, useState, useEffect, createContext, Dispatch, SetStateAction
 import { Survey, SurveyResponse } from "../types/surveyTypes";
 
 const INITIAL_SURVEY: Survey = {
+  id: 123,
   title: "Sample Survey",
   image: "https://48tools.com/wp-content/uploads/2015/09/shortlink.png",
   questions: [
@@ -57,7 +58,7 @@ const INITIAL_SURVEY: Survey = {
 }
 
 const INITIAL_ANSWER: SurveyResponse = {
-  surveyId: -1,
+  surveyId: 0,
   answers: [],
   status: 'pending'
 }

@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useEffect } from 'react';
+import { ChangeEvent, useContext } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -24,7 +24,6 @@ const QuestionCard = ({ question, questionId, availableSeconds, answer }: Props)
 
   const saveAnswer = (answerValue: number) => {
     const { answers } = userAnswers;
-
     answers.splice(questionId, 1, answerValue);
 
     setUserAnswers({
@@ -54,7 +53,7 @@ const QuestionCard = ({ question, questionId, availableSeconds, answer }: Props)
             {question.options.map((option, index) => (
               <FormControlLabel
                 key={question.text + option.text}
-                value={index}
+                value={index + 1}
                 control={<Radio />}
                 label={question.text}
                 disabled={isAnswered}
