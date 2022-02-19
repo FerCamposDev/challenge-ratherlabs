@@ -1,10 +1,10 @@
-import type { Web3ReactHooks } from '@web3-react/core'
+import { AuthError } from "react-moralis";
 
 interface StatusProps {
-  isActivating: ReturnType<Web3ReactHooks['useIsActivating']>
-  error: ReturnType<Web3ReactHooks['useError']>
-  isActive: ReturnType<Web3ReactHooks['useIsActive']>
+  isActivating: boolean
+  isActive: boolean
   isDefaultChain: boolean
+  error?: string
 }
 
 export function Status({ isActivating, error, isActive, isDefaultChain }: StatusProps) {
@@ -15,9 +15,9 @@ export function Status({ isActivating, error, isActive, isDefaultChain }: Status
       ) : isActive && !isDefaultChain ? (
         <>🟠 Connected but in other chain</>
       ) : isActive ? (
-        <>🟢 Connected to Ropsten</>
+        <>🟢 Connected to correct Network</>
       ) : error ? (
-        <>🔴 {error.name ?? `Error. ${error.message}`}</>
+        <>🔴 {error ?? `Error. ${error}`}</>
       ) : (
         <>⚪️ Disconnected</>
       )}

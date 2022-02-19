@@ -1,15 +1,19 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { UserProvider } from '../contexts/UserContext'
 import { ContractProvider } from '../contexts/ContractContext'
+import { MoralisProvider } from 'react-moralis'
+import { moralisConfig } from '../config/moralisConfig'
+import { SurveyProvider } from '../contexts/SurveyContext'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <UserProvider>
+    <MoralisProvider appId={moralisConfig.appId} serverUrl={moralisConfig.serverUrl}>
       <ContractProvider>
-        <Component {...pageProps} />
+        <SurveyProvider>
+          <Component {...pageProps} />
+        </SurveyProvider>
       </ContractProvider>
-    </UserProvider>
+    </MoralisProvider>
   )
 }
 
