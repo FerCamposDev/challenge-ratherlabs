@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { useMoralis, useWeb3ExecuteFunction } from "react-moralis";
-import { formatEther } from "@ethersproject/units";
-import { BigNumber } from "ethers";
+import { useEffect, useState } from 'react';
+import { useMoralis, useWeb3ExecuteFunction } from 'react-moralis';
+import { formatEther } from '@ethersproject/units';
+import { BigNumber } from 'ethers';
 
-import { surveyConfig } from "../config/surveyContract";
+import { surveyConfig } from '../config/surveyContract';
 
 export default function useTokenBalance() {
   const { account } = useMoralis();
@@ -11,13 +11,12 @@ export default function useTokenBalance() {
     {
       abi: surveyConfig.abi,
       contractAddress: surveyConfig.address,
-      functionName: "balanceOf",
+      functionName: 'balanceOf',
       params: {
-        //account: '0x63b30e1a8b1454c25b1a7d6e50274a5d996c1648',
         account,
       },
     },
-    { autoFetch: false }
+    { autoFetch: false },
   );
 
   const [tokenBalance, setTokenBalance] = useState<string>();
@@ -47,4 +46,4 @@ export default function useTokenBalance() {
     tokenBalance,
     getTokenBalance,
   };
-};
+}

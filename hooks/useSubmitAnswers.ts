@@ -5,18 +5,20 @@ import { surveyConfig } from '../config/surveyContract';
 
 export default function useSubmitAnswers() {
   const { account } = useMoralis();
-  const { data, error, runContractFunction, isFetching } = useWeb3Contract({
+  const {
+    data, error, runContractFunction, isFetching,
+  } = useWeb3Contract({
     abi: surveyConfig.abi,
     contractAddress: surveyConfig.address,
-    functionName: "submit",
+    functionName: 'submit',
     params: {
       _surveyId: 0,
-      _answerIds: []
+      _answerIds: [],
     },
   });
   const [status, setStatus] = useState({
     error: false,
-    success: false
+    success: false,
   });
 
   const submitAnswers = async (surveyId: number, answersIds: number[]) => {
@@ -25,9 +27,9 @@ export default function useSubmitAnswers() {
         params: {
           params: {
             _surveyId: surveyId,
-            _answerIds: answersIds
+            _answerIds: answersIds,
           },
-        }
+        },
       });
     }
   };
@@ -43,18 +45,18 @@ export default function useSubmitAnswers() {
       console.log('data', data);
       setStatus({
         error: false,
-        success: true
-      })
+        success: true,
+      });
     }
   }, [data]);
 
   useEffect(() => {
-    console.log('error', error);
     if (error) {
+      console.log('error', error);
       setStatus({
         error: true,
-        success: false
-      })
+        success: false,
+      });
     }
   }, [error]);
 
@@ -62,6 +64,6 @@ export default function useSubmitAnswers() {
     submitAnswers,
     error: status.error,
     success: status.success,
-    isFetching
+    isFetching,
   };
-};
+}

@@ -1,12 +1,16 @@
-import { useChain, useMoralis } from 'react-moralis';
-import { formatEther } from '@ethersproject/units';
+import { useChain, useMoralis, useNativeBalance } from 'react-moralis';
 import { useContext } from 'react';
 import { ContractContext } from '../../../../contexts/ContractContext';
+import { DEFAULT_CHAIN_HEX } from '../../../../config/chainsConfig';
+
+type Chain = 'eth' | '0x1' | 'ropsten' | '0x3' | 'rinkeby' | '0x4' | 'goerli' | '0x5' | 'kovan' | '0x2a' | 'polygon' | '0x89' | 'mumbai' | '0x13881' | 'bsc' | '0x38' | 'bsc testnet' | '0x61' | 'avalanche' | '0xa86a' | 'avalanche testnet' | '0xa869' | 'fantom' | '0xfa';
 
 export default function Account() {
+  const { chainId } = useChain();
   const { tokenBalance } = useContext(ContractContext);
-  const { chain } = useChain();
-  const balance = 1234;
+  const {
+    data: balance,
+  } = useNativeBalance({ chain: chainId as Chain || DEFAULT_CHAIN_HEX });
   const { account } = useMoralis();
 
   if (!account) return null;
@@ -18,14 +22,12 @@ export default function Account() {
         <b>{account}</b>
       </p>
       <p>
-        Balance:
-        <b>{formatEther(balance)}</b>
-        {chain?.nativeCurrency.symbol}
+        Balance:&nbsp;
+        <b>{balance.formatted}</b>
       </p>
       <p>
         Token Balance:
-        <b>{tokenBalance || '-'}</b>
-        QUIZ
+        <b>{`${tokenBalance} QUIZ` || '-'}</b>
       </p>
     </div>
   );

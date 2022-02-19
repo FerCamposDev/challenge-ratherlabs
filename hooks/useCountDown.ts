@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export default function useCountDown(initCount = 0) {
   const [count, setCount] = useState<number>(initCount);
@@ -9,14 +9,12 @@ export default function useCountDown(initCount = 0) {
     const intervalId = setInterval(() => {
       setCount((prevCount) => {
         const newCount = prevCount - 1;
-        console.log('newCount', newCount);
 
         if (newCount <= 0) {
           clearInterval(intervalId);
         }
         return newCount;
       });
-
     }, 1000);
 
     return () => {
@@ -25,6 +23,6 @@ export default function useCountDown(initCount = 0) {
   }, [initCount]);
 
   return {
-    count
+    count,
   };
-};
+}
