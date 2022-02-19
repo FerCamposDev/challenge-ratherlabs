@@ -1,12 +1,13 @@
 import { useChain, useMoralis } from 'react-moralis';
 import { formatEther } from '@ethersproject/units'
-import useTokenBalance from '../../../../hooks/useTokenBalance';
+import { useContext } from 'react';
+import { ContractContext } from '../../../../contexts/ContractContext';
 
 export function Account() {
+  const { tokenBalance } = useContext(ContractContext);
   const { chain } = useChain();
   const balance = 1234;
   const { account } = useMoralis();
-  const {tokenBalance} = useTokenBalance();
 
   if (account === '') return null;
 
@@ -18,27 +19,3 @@ export function Account() {
     </div>
   )
 }
-
-/*
-  const { fetchERC20Balances, data, error } = useERC20Balances();
-  
-useEffect(() => {
-    if (account && account !== '') {
-      fetchERC20Balances({
-        params: {
-          address: account,
-          token_addresses: [surveyConfig.address],
-          chain: 'ropsten',
-        }
-      });
-    }
-  }, [account]);
-
-  useEffect(()=>{
-    console.log('data', data);
-  },[data]);
-
-  useEffect(()=>{
-    console.log('error', error);
-  },[error]);
- */
