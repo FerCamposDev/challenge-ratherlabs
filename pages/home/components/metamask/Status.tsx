@@ -1,33 +1,34 @@
-interface StatusProps {
-  isActivating: boolean
-  isActive: boolean
-  isDefaultChain: boolean
-  error: string | undefined
-}
+import { useChain, useMoralis } from 'react-moralis';
+import { DEFAULT_CHAIN_HEX } from '../../../../config/chainsConfig';
 
-export default function Status(props: StatusProps) {
+export default function Status() {
   const {
-    isActivating, error, isActive, isDefaultChain,
-  } = props;
+    isAuthenticated,
+    isAuthenticating,
+    authError,
+  } = useMoralis();
+  const { chainId } = useChain();
 
-  if (isActivating) {
+  const isDefaultChain = chainId === DEFAULT_CHAIN_HEX;
+
+  if (isAuthenticating) {
     return <>🟡 Connecting</>;
   }
 
-  if (isActive && !isDefaultChain) {
-    return <>🟠 Connected but in other chain</>;
-  }
-
-  if (isActive) {
+  if (isAuthenticated && isDefaultChain) {
     return <>🟢 Connected to correct Network</>;
   }
 
-  if (error) {
+  if (isAuthenticated) {
+    return <>🟠 Connected but on another network</>;
+  }
+
+  if (authError) {
     return (
       <>
         🔴 Error.
         {' '}
-        {error}
+        {authError.message}
       </>
     );
   }

@@ -1,24 +1,19 @@
-import { useCallback } from 'react';
-
-// material-ui
-import { Button } from '@mui/material';
+import { useCallback, useEffect } from 'react';
+import { useMoralis, useChain } from 'react-moralis';
+import { Button, Grid } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 
-import { useMoralis, useChain } from 'react-moralis';
 import { DEFAULT_CHAIN, DEFAULT_CHAIN_HEX } from '../../../../config/chainsConfig';
 
 function ConnectButton() {
   const {
-    authenticate,
-    logout,
-    isAuthenticated,
-    isAuthenticating,
+    authenticate, logout, isAuthenticated, isAuthenticating, Moralis,
   } = useMoralis();
   const { chainId, switchNetwork } = useChain();
 
   const connectChain = useCallback(
     async () => {
-      if (!chainId || chainId === '') {
+      if (!chainId || !isAuthenticated) {
         await authenticate({
           chainId: DEFAULT_CHAIN,
           signingMessage: 'Awesome Challenge',
@@ -37,8 +32,14 @@ function ConnectButton() {
     [],
   );
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      Moralis.enableWeb3();
+    }
+  }, [isAuthenticated]);
+
   return (
-    <div>
+    <Grid container justifyContent="space-between">
       <LoadingButton
         variant="contained"
         onClick={isAuthenticated ? disconnectChain : connectChain}
@@ -46,12 +47,12 @@ function ConnectButton() {
       >
         {isAuthenticated ? 'Disconnect' : 'Connect'}
       </LoadingButton>
-      {isAuthenticated && chainId !== DEFAULT_CHAIN_HEX && (
-      <Button variant="contained" onClick={connectChain}>
-        Change to Ropsten
-      </Button>
+      {isAuthenticated && chainId && chainId !== DEFAULT_CHAIN_HEX && (
+        <Button variant="contained" onClick={connectChain}>
+          Change to Ropsten
+        </Button>
       )}
-    </div>
+    </Grid>
   );
 }
 

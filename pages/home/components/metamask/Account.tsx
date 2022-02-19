@@ -9,7 +9,7 @@ export default function Account() {
   const balance = 1234;
   const { account } = useMoralis();
 
-  if (account === '') return null;
+  if (!account) return null;
 
   return (
     <div>
