@@ -8,15 +8,17 @@ import useSubmitAnswers from '../../../../hooks/useSubmitAnswers';
 import QuestionCard from './QuestionCard';
 import { ContractContext } from '../../../../contexts/ContractContext';
 
-const AnswersSummary = () => {
+function AnswersSummary() {
   const { survey, userAnswers } = useContext(SurveyContext);
   const { getTokenBalance } = useContext(ContractContext);
   const { questions } = survey;
-  const { submitAnswers, error, success, isFetching } = useSubmitAnswers();
+  const {
+    submitAnswers, error, success, isFetching,
+  } = useSubmitAnswers();
 
   const handleSubmit = async () => {
     await submitAnswers(userAnswers.surveyId, userAnswers.answers);
-  }
+  };
 
   useEffect(() => {
     if (success) {
@@ -48,12 +50,12 @@ const AnswersSummary = () => {
           </LoadingButton>
           <Grid item xs={12} sx={{ p: 2 }}>
             {success && (
-              <Typography variant="body1" color="success" align="center">
+              <Typography variant="body1" align="center" sx={{ color: 'green' }}>
                 The transaction was executed successfully
               </Typography>
             )}
             {error && (
-              <Typography variant="body1" color="error" align="center">
+              <Typography variant="body1" align="center" sx={{ color: 'red' }}>
                 An error occurred in the transaction
               </Typography>
             )}
@@ -62,6 +64,6 @@ const AnswersSummary = () => {
       </Grid>
     </Grid>
   );
-};
+}
 
 export default AnswersSummary;

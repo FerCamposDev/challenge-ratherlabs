@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
-import { Box, Stepper, Step, StepLabel, Button, Typography, Grid } from '@mui/material';
+import {
+  Box, Stepper, Step, StepLabel, Button, Typography, Grid,
+} from '@mui/material';
 
 import { SurveyContext } from '../../../../contexts/SurveyContext';
 import QuestionCard from './QuestionCard';
@@ -12,12 +14,6 @@ export default function SurveyStepper() {
   const steps = survey.questions;
   const activeQuestion = activeStep !== steps.length ? steps[activeStep] : undefined;
   const { count } = useCountDown(activeQuestion?.lifetimeSeconds);
-  
-    useEffect(() => {
-      if (count === 0 && activeStep !== steps.length) {
-        handleNext();
-      }
-    }, [count]);
 
   const saveAnswer = () => {
     const { answers } = userAnswers;
@@ -25,15 +21,21 @@ export default function SurveyStepper() {
       answers.splice(activeStep, 1, 0);
       setUserAnswers({
         ...userAnswers,
-        answers
+        answers,
       });
     }
-  }
+  };
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     saveAnswer();
   };
+
+  useEffect(() => {
+    if (count === 0 && activeStep !== steps.length) {
+      handleNext();
+    }
+  }, [count]);
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -41,13 +43,11 @@ export default function SurveyStepper() {
         {survey.title}
       </Typography>
       <Stepper activeStep={activeStep}>
-        {steps.map((question, index) => {
-          return (
-            <Step key={question.text}>
-              <StepLabel />
-            </Step>
-          );
-        })}
+        {steps.map((question) => (
+          <Step key={question.text}>
+            <StepLabel />
+          </Step>
+        ))}
       </Stepper>
       {activeStep === steps.length ? (
         <AnswersSummary />

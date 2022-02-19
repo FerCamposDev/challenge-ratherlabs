@@ -1,16 +1,16 @@
-import { useContext } from "react";
-import { SurveyContext } from "../../../../contexts/SurveyContext";
+import { useContext } from 'react';
+import { SurveyContext } from '../../../../contexts/SurveyContext';
 
-import SurveyPresentation from "./SurveyPresentation";
-import SurveyStepper from "./SurveyStteper";
+import SurveyPresentation from './SurveyPresentation';
+import SurveyStepper from './SurveyStteper';
 
-const Survey = () => {
+function Survey() {
   const { userAnswers } = useContext(SurveyContext);
 
-  if(userAnswers.status === 'pending'){
-    return <SurveyPresentation />
+  if (userAnswers.status === 'pending') {
+    return <SurveyPresentation />;
   }
-  
+
   return <SurveyStepper />;
 }
 

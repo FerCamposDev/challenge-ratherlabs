@@ -1,16 +1,16 @@
-import { Grid } from "@mui/material";
-import dynamic from "next/dynamic";
-import Head from "next/head";
-import { useMoralis } from "react-moralis";
-import { DEFAULT_CHAIN_HEX } from "../../config/chainsConfig";
-import Survey from "./components/survey";
+import { Grid } from '@mui/material';
+import dynamic from 'next/dynamic';
+import Head from 'next/head';
+import { useMoralis } from 'react-moralis';
+import { DEFAULT_CHAIN_HEX } from '../../config/chainsConfig';
+import Survey from './components/survey';
 
-const MetaMaskCard = dynamic(() => import('./components/metamask/MetaMaskCard'), { ssr: false })
+const MetaMaskCard = dynamic(() => import('./components/metamask/MetaMaskCard'), { ssr: false });
 
-const Home = () => {
+function Home() {
   const {
     isAuthenticated,
-    chainId
+    chainId,
   } = useMoralis();
 
   return (
@@ -30,6 +30,6 @@ const Home = () => {
       )}
     </div>
   );
-};
+}
 
 export default Home;

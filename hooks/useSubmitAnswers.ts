@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { useMoralis, useWeb3Contract } from "react-moralis";
+import { useEffect, useState } from 'react';
+import { useMoralis, useWeb3Contract } from 'react-moralis';
 
-import { surveyConfig } from "../config/surveyContract";
+import { surveyConfig } from '../config/surveyContract';
 
 export default function useSubmitAnswers() {
   const { account } = useMoralis();

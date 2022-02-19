@@ -1,9 +1,9 @@
 import { useChain, useMoralis } from 'react-moralis';
-import { formatEther } from '@ethersproject/units'
+import { formatEther } from '@ethersproject/units';
 import { useContext } from 'react';
 import { ContractContext } from '../../../../contexts/ContractContext';
 
-export function Account() {
+export default function Account() {
   const { tokenBalance } = useContext(ContractContext);
   const { chain } = useChain();
   const balance = 1234;
@@ -13,9 +13,20 @@ export function Account() {
 
   return (
     <div>
-      <p>Account: <b>{account}</b></p>
-      <p>Balance: <b>{formatEther(balance)}</b> {chain?.nativeCurrency.symbol}</p>
-      <p>Token Balance: <b>{tokenBalance ? tokenBalance : '-'}</b> QUIZ</p>
+      <p>
+        Account:
+        <b>{account}</b>
+      </p>
+      <p>
+        Balance:
+        <b>{formatEther(balance)}</b>
+        {chain?.nativeCurrency.symbol}
+      </p>
+      <p>
+        Token Balance:
+        <b>{tokenBalance || '-'}</b>
+        QUIZ
+      </p>
     </div>
-  )
+  );
 }

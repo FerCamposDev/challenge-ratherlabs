@@ -1,26 +1,36 @@
-import { AuthError } from "react-moralis";
-
 interface StatusProps {
   isActivating: boolean
   isActive: boolean
   isDefaultChain: boolean
-  error?: string
+  error: string | undefined
 }
 
-export function Status({ isActivating, error, isActive, isDefaultChain }: StatusProps) {
-  return (
-    <div>
-      {isActivating ? (
-        <>🟡 Connecting</>
-      ) : isActive && !isDefaultChain ? (
-        <>🟠 Connected but in other chain</>
-      ) : isActive ? (
-        <>🟢 Connected to correct Network</>
-      ) : error ? (
-        <>🔴 {error ?? `Error. ${error}`}</>
-      ) : (
-        <>⚪️ Disconnected</>
-      )}
-    </div>
-  )
+export default function Status(props: StatusProps) {
+  const {
+    isActivating, error, isActive, isDefaultChain,
+  } = props;
+
+  if (isActivating) {
+    return <>🟡 Connecting</>;
+  }
+
+  if (isActive && !isDefaultChain) {
+    return <>🟠 Connected but in other chain</>;
+  }
+
+  if (isActive) {
+    return <>🟢 Connected to correct Network</>;
+  }
+
+  if (error) {
+    return (
+      <>
+        🔴 Error.
+        {' '}
+        {error}
+      </>
+    );
+  }
+
+  return <>⚪️ Disconnected</>;
 }

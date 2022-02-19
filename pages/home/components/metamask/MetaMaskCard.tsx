@@ -1,8 +1,8 @@
 import { Card, CardContent } from '@mui/material';
 import { useChain, useMoralis } from 'react-moralis';
 
-import { Account } from './Account';
-import { Status } from './Status';
+import Account from './Account';
+import Status from './Status';
 import ConnectButton from './ConnectButton';
 
 import { DEFAULT_CHAIN_HEX } from '../../../../config/chainsConfig';
@@ -13,7 +13,7 @@ export default function MetaMaskCard() {
     isAuthenticating,
     authError,
   } = useMoralis();
-  const {chainId, chain} = useChain();
+  const { chainId, chain } = useChain();
 
   return (
     <Card>
@@ -27,7 +27,11 @@ export default function MetaMaskCard() {
             isDefaultChain={chainId === DEFAULT_CHAIN_HEX}
           />
           <div style={{ marginBottom: '1rem' }} />
-          {chain && <p>Chain id: {chain.networkId} ({chain.name})</p>}
+          {chain && (
+            <p>
+              {`Chain id: ${chain.networkId} (${chain.name})`}
+            </p>
+          )}
           {isAuthenticated && <Account />}
         </div>
         <div style={{ marginBottom: '1rem' }} />
@@ -35,5 +39,5 @@ export default function MetaMaskCard() {
         <ConnectButton />
       </CardContent>
     </Card>
-  )
+  );
 }

@@ -14,7 +14,7 @@ export default function SurveyPresentation() {
     setUserAnswers({
       ...userAnswers,
       surveyId: survey.id,
-      status:'inProgress'
+      status: 'inProgress',
     });
   };
 

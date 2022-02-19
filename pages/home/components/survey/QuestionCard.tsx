@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import { ChangeEvent, useContext } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -18,7 +19,9 @@ type Props = {
   answer?: number;
 };
 
-const QuestionCard = ({ question, questionId, availableSeconds, answer }: Props) => {
+function QuestionCard({
+  question, questionId, availableSeconds, answer,
+}: Props) {
   const { userAnswers, setUserAnswers } = useContext(SurveyContext);
   const isAnswered = answer !== undefined;
 
@@ -28,13 +31,13 @@ const QuestionCard = ({ question, questionId, availableSeconds, answer }: Props)
 
     setUserAnswers({
       ...userAnswers,
-      answers
-    })
+      answers,
+    });
   };
 
   const handleChange = (_event: ChangeEvent<HTMLInputElement>, value: string) => {
     saveAnswer(Number(value));
-  }
+  };
 
   return (
     <Card sx={{ minWidth: 300, maxWidth: 400 }}>
@@ -64,11 +67,12 @@ const QuestionCard = ({ question, questionId, availableSeconds, answer }: Props)
       </CardContent>
       {availableSeconds && (
         <Typography variant="subtitle1">
-          Available Seconds: <b>{availableSeconds}</b>
+          Available Seconds:
+          <b>{availableSeconds}</b>
         </Typography>
       )}
     </Card>
   );
-};
+}
 
 export default QuestionCard;
