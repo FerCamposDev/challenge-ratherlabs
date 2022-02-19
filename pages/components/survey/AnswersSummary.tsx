@@ -2,11 +2,11 @@ import { useContext, useEffect } from 'react';
 import { LoadingButton } from '@mui/lab';
 import { Grid, Typography } from '@mui/material';
 
-import { SurveyContext } from '../../../../contexts/SurveyContext';
+import { SurveyContext } from '../../../contexts/SurveyContext';
 
-import useSubmitAnswers from '../../../../hooks/useSubmitAnswers';
+import useSubmitAnswers from '../../../hooks/useSubmitAnswers';
 import QuestionCard from './QuestionCard';
-import { ContractContext } from '../../../../contexts/ContractContext';
+import { ContractContext } from '../../../contexts/ContractContext';
 
 function AnswersSummary() {
   const { survey, userAnswers } = useContext(SurveyContext);

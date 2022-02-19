@@ -9,8 +9,8 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 
-import { Question } from '../../../../types/surveyTypes';
-import { SurveyContext } from '../../../../contexts/SurveyContext';
+import { Question } from '../../../types/surveyTypes';
+import { SurveyContext } from '../../../contexts/SurveyContext';
 
 type Props = {
   question: Question;

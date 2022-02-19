@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useContext } from 'react';
-import { SurveyContext } from '../../../../contexts/SurveyContext';
+import { SurveyContext } from '../../../contexts/SurveyContext';
 
 export default function SurveyPresentation() {
   const { survey, setUserAnswers, userAnswers } = useContext(SurveyContext);

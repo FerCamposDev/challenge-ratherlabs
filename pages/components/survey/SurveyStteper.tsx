@@ -3,9 +3,9 @@ import {
   Box, Stepper, Step, StepLabel, Button, Typography, Grid,
 } from '@mui/material';
 
-import { SurveyContext } from '../../../../contexts/SurveyContext';
+import { SurveyContext } from '../../../contexts/SurveyContext';
 import QuestionCard from './QuestionCard';
-import useCountDown from '../../../../hooks/useCountDown';
+import useCountDown from '../../../hooks/useCountDown';
 import AnswersSummary from './AnswersSummary';
 
 export default function SurveyStepper() {

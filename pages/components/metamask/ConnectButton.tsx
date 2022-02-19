@@ -3,7 +3,7 @@ import { useMoralis, useChain } from 'react-moralis';
 import { Button, Grid } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 
-import { DEFAULT_CHAIN, DEFAULT_CHAIN_HEX } from '../../../../config/chainsConfig';
+import { DEFAULT_CHAIN, DEFAULT_CHAIN_HEX } from '../../../config/chainsConfig';
 
 function ConnectButton() {
   const {
