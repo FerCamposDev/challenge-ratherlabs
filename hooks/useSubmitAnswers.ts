@@ -52,7 +52,7 @@ export default function useSubmitAnswers() {
 
   useEffect(() => {
     if (error) {
-      console.log('error', error);
+      console.log('error', error.message);
       setStatus({
         error: true,
         success: false,

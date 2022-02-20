@@ -10,7 +10,7 @@ import { ContractContext } from '../../../contexts/ContractContext';
 
 function AnswersSummary() {
   const { survey, userAnswers } = useContext(SurveyContext);
-  const { getTokenBalance } = useContext(ContractContext);
+  const { tokenBalance, getTokenBalance } = useContext(ContractContext);
   const { questions } = survey;
   const {
     submitAnswers, error, success, isFetching,
@@ -21,9 +21,24 @@ function AnswersSummary() {
   };
 
   useEffect(() => {
+    let intervalBalance: any;
     if (success) {
-      getTokenBalance();
+      let prevTokenBalance = tokenBalance;
+
+      intervalBalance = setInterval(async () => {
+        prevTokenBalance = tokenBalance;
+        const actualTokenBalance = await getTokenBalance();
+
+        console.log('prevTokenBalance :>> ', prevTokenBalance);
+        console.log('tokenBalance :>> ', actualTokenBalance);
+        console.log('prevTokenBalance !== actualTokenBalance :>> ', prevTokenBalance !== actualTokenBalance);
+        if (prevTokenBalance !== actualTokenBalance) {
+          clearInterval(intervalBalance);
+        }
+      }, 5000);
     }
+
+    return () => { clearInterval(intervalBalance); };
   }, [success]);
 
   return (
@@ -34,7 +49,7 @@ function AnswersSummary() {
         </Typography>
       </Grid>
       {questions.map((question, index) => (
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid item xs={12} sm={6} md={4} key={question.text}>
           <QuestionCard
             question={question}
             questionId={index}
@@ -45,13 +60,20 @@ function AnswersSummary() {
 
       <Grid item xs={12}>
         <Grid container justifyContent="center">
-          <LoadingButton variant="contained" onClick={handleSubmit} loading={isFetching}>
+          <LoadingButton
+            variant="contained"
+            onClick={handleSubmit}
+            loading={isFetching}
+            disabled={success}
+          >
             Submit
           </LoadingButton>
           <Grid item xs={12} sx={{ p: 2 }}>
             {success && (
               <Typography variant="body1" align="center" sx={{ color: 'green' }}>
-                The transaction was executed successfully
+                The transaction was executed successfully.
+                <br />
+                Your tokens will be updated in a few seconds
               </Typography>
             )}
             {error && (

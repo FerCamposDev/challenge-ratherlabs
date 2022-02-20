@@ -7,7 +7,7 @@ import { surveyConfig } from '../config/surveyContract';
 
 export default function useTokenBalance() {
   const { account } = useMoralis();
-  const { data, error, fetch } = useWeb3ExecuteFunction(
+  const { fetch } = useWeb3ExecuteFunction(
     {
       abi: surveyConfig.abi,
       contractAddress: surveyConfig.address,
@@ -23,24 +23,32 @@ export default function useTokenBalance() {
 
   const getTokenBalance = async () => {
     if (account && account !== '') {
-      await fetch();
+      try {
+        const balanceData = await fetch();
+        const balance = formatEther(balanceData as BigNumber);
+        setTokenBalance(balance);
+        return balance;
+      } catch (error) {
+        console.log('error', error);
+      }
     }
+    return tokenBalance;
   };
 
   useEffect(() => {
     getTokenBalance();
   }, [account]);
 
-  useEffect(() => {
+  /*  useEffect(() => {
     if (data) {
       const balance = formatEther(data as BigNumber);
       setTokenBalance(balance);
     }
-  }, [data]);
+  }, [data]); */
 
-  useEffect(() => {
-    console.log('error', error);
-  }, [error]);
+  /* useEffect(() => {
+    if (error) { console.log('error', error); }
+  }, [error]); */
 
   return {
     tokenBalance,

@@ -58,7 +58,7 @@ function QuestionCard({
                 key={question.text + option.text}
                 value={index + 1}
                 control={<Radio />}
-                label={question.text}
+                label={option.text}
                 disabled={isAnswered}
               />
             ))}

@@ -18,16 +18,16 @@ export default function Account() {
   return (
     <div>
       <p>
-        Account:
-        <b>{account}</b>
+        Account:&nbsp;
+        <b>{`${account.substring(0, 6)}...${account.substring(38)}`}</b>
       </p>
       <p>
         Balance:&nbsp;
         <b>{balance.formatted}</b>
       </p>
       <p>
-        Token Balance:
-        <b>{`${tokenBalance} QUIZ` || '-'}</b>
+        Token Balance:&nbsp;
+        <b>{`${tokenBalance || 0} QUIZ`}</b>
       </p>
     </div>
   );

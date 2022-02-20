@@ -39,7 +39,7 @@ function ConnectButton() {
   }, [isAuthenticated]);
 
   return (
-    <Grid container justifyContent="space-between">
+    <Grid container justifyContent="space-around">
       <LoadingButton
         variant="contained"
         onClick={isAuthenticated ? disconnectChain : connectChain}
