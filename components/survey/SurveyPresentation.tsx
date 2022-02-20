@@ -25,7 +25,7 @@ export default function SurveyPresentation() {
   }, [userAnswers.status]);
 
   return (
-    <Card>
+    <Card sx={{ minWidth: 340 }}>
       <CardMedia
         component="img"
         height="240"

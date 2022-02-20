@@ -33,8 +33,8 @@ function Home() {
         >
           Challenge for
           {' '}
-          <span className={styles.logo}>
-            <Image src="/rather-labs.svg" alt="Rather Logo" width={20} height={16} />
+          <span>
+            <Image src="/rather-labs.svg" alt="Rather Logo" width={25} height={16} />
           </span>
           Rather Labs
         </a>
