@@ -3,8 +3,9 @@ import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { MoralisProvider } from 'react-moralis';
 import { ContractProvider } from '../contexts/ContractContext';
-import { moralisConfig } from '../config/moralisConfig';
 import { SurveyProvider } from '../contexts/SurveyContext';
+
+import moralisConfig from '../config/moralisConfig';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

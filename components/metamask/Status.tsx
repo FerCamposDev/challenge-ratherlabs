@@ -1,5 +1,5 @@
 import { useChain, useMoralis } from 'react-moralis';
-import { DEFAULT_CHAIN_HEX } from '../../../config/chainsConfig';
+import { DEFAULT_CHAIN_HEX } from '../../config/chainsConfig';
 
 export default function Status() {
   const {

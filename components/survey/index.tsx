@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { SurveyContext } from '../../../contexts/SurveyContext';
+import { SurveyContext } from '../../contexts/SurveyContext';
 
 import SurveyPresentation from './SurveyPresentation';
 import SurveyStepper from './SurveyStteper';

@@ -4,8 +4,8 @@ import { useMoralis } from 'react-moralis';
 import { Grid } from '@mui/material';
 import { DEFAULT_CHAIN_HEX } from '../config/chainsConfig';
 
-import Survey from './components/survey';
-import MetaMaskCard from './components/metamask/MetaMaskCard';
+import Survey from '../components/survey';
+import MetaMaskCard from '../components/metamask/MetaMaskCard';
 
 import styles from '../styles/Home.module.css';
 

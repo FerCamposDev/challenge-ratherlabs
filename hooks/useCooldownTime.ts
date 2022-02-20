@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useMoralis, useWeb3ExecuteFunction } from 'react-moralis';
 import { BigNumber } from 'ethers';
 import Web3 from 'web3';
-import { surveyConfig } from '../config/surveyContract';
+import surveyConfig from '../config/surveyContract';
 
 export default function useCooldownTime() {
   const { account } = useMoralis();

@@ -3,7 +3,7 @@ import { useMoralis, useWeb3ExecuteFunction } from 'react-moralis';
 import { formatEther } from '@ethersproject/units';
 import { BigNumber } from 'ethers';
 
-import { surveyConfig } from '../config/surveyContract';
+import surveyConfig from '../config/surveyContract';
 
 export default function useTokenBalance() {
   const { account } = useMoralis();
