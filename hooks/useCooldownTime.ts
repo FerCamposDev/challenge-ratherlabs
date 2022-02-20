@@ -8,13 +8,11 @@ export default function useCooldownTime() {
   const { account } = useMoralis();
   const {
     data: cooldownSecondsData, error: cooldownSecondsError, fetch: fetchCooldownSeconds,
-  } = useWeb3ExecuteFunction(
-    {
-      abi: surveyConfig.abi,
-      contractAddress: surveyConfig.address,
-      functionName: 'cooldownSeconds',
-    },
-  );
+  } = useWeb3ExecuteFunction({
+    abi: surveyConfig.abi,
+    contractAddress: surveyConfig.address,
+    functionName: 'cooldownSeconds',
+  });
   const {
     data: lastSubmittalData, error: lastSubmittalError, fetch: lastSubmittalFetch,
   } = useWeb3ExecuteFunction(
@@ -29,17 +27,31 @@ export default function useCooldownTime() {
   const [cooldownSeconds, setCooldownSeconds] = useState<number>();
   const [lastSubmittal, setLastSubmittal] = useState<number>();
   const [cooldownTime, setCooldownTime] = useState<Date>();
+  const [isCooldownTime, setIsCooldownTime] = useState(false);
 
   const calculateCooldownTime = async () => {
     if (cooldownSeconds && lastSubmittal) {
       const timestamp = cooldownSeconds + lastSubmittal;
-      setCooldownTime(new Date(timestamp * 1000));
+      const cooldownTimeCalculated = new Date(timestamp * 1000);
+      setCooldownTime(cooldownTimeCalculated);
+      setIsCooldownTime(new Date().getTime() < cooldownTimeCalculated.getTime());
     }
   };
 
   useEffect(() => {
     calculateCooldownTime();
   }, [cooldownSeconds, lastSubmittal]);
+
+  useEffect(() => {
+    if (cooldownTime && isCooldownTime) {
+      const actualCooldownMilliSeconds = (cooldownTime.getTime() - new Date().getTime());
+      // console.log('actualCooldownMilliSeconds', actualCooldownMilliSeconds / 1000); // in seconds
+
+      setTimeout(() => {
+        setIsCooldownTime(false);
+      }, actualCooldownMilliSeconds + 5000);
+    }
+  }, [cooldownTime, isCooldownTime]);
 
   useEffect(() => {
     if (account) {
@@ -82,5 +94,6 @@ export default function useCooldownTime() {
   return {
     cooldownTime,
     calculateCooldownTime,
+    isCooldownTime,
   };
 }

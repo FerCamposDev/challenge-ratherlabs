@@ -29,6 +29,14 @@ export default function SurveyStepper() {
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     saveAnswer();
+
+    const isFinish = activeStep === steps.length - 1;
+    if (isFinish) {
+      setUserAnswers({
+        ...userAnswers,
+        status: 'completed',
+      });
+    }
   };
 
   useEffect(() => {
@@ -38,7 +46,7 @@ export default function SurveyStepper() {
   }, [count]);
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%', p: 2 }}>
       <Typography variant="h4" align="center" paragraph>
         {survey.title}
       </Typography>

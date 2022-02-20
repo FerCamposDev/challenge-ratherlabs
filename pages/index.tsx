@@ -1,16 +1,15 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { useMoralis } from 'react-moralis';
 import { Grid } from '@mui/material';
-import { DEFAULT_CHAIN_HEX } from '../config/chainsConfig';
 
+import useConnectionStatus from '../hooks/useConnectionsStatus';
 import Survey from '../components/survey';
-import MetaMaskCard from '../components/metamask/MetaMaskCard';
 
 import styles from '../styles/Home.module.css';
+import StatusCard from '../components/navigation/StatusCard';
 
 function Home() {
-  const { isAuthenticated, chainId } = useMoralis();
+  const { isCorrectConnection } = useConnectionStatus();
 
   return (
     <div>
@@ -21,13 +20,9 @@ function Home() {
       </Head>
 
       <main className={styles.main}>
-        <MetaMaskCard />
-
-        {isAuthenticated && chainId === DEFAULT_CHAIN_HEX && (
-          <Grid container justifyContent="center">
-            <Survey />
-          </Grid>
-        )}
+        <Grid container justifyContent="center">
+          {isCorrectConnection ? <Survey /> : <StatusCard />}
+        </Grid>
       </main>
 
       <footer className={styles.footer}>

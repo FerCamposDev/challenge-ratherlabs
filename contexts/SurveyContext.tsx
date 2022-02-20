@@ -69,13 +69,15 @@ const INITIAL_ANSWER: SurveyResponse = {
 type SurveyProps = {
   survey: Survey;
   userAnswers: SurveyResponse;
-  setUserAnswers: Dispatch<SetStateAction<SurveyResponse>>
+  setUserAnswers: Dispatch<SetStateAction<SurveyResponse>>;
+  restartAnswers: Function;
 };
 
 const initialState: SurveyProps = {
   survey: INITIAL_SURVEY,
   userAnswers: INITIAL_ANSWER,
   setUserAnswers: () => { },
+  restartAnswers: () => { },
 };
 
 const SurveyContext = createContext(initialState);
@@ -89,12 +91,17 @@ function SurveyProvider({ children }: { children: ReactNode }) {
     setSurvey(INITIAL_SURVEY);
   }, []);
 
+  const restartAnswers = () => {
+    setUserAnswers(INITIAL_ANSWER);
+  };
+
   return (
     <SurveyContext.Provider
       value={{
         survey,
         userAnswers,
         setUserAnswers,
+        restartAnswers,
       }}
     >
       {children}

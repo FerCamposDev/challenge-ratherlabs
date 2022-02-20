@@ -9,7 +9,7 @@ import QuestionCard from './QuestionCard';
 import { ContractContext } from '../../contexts/ContractContext';
 
 function AnswersSummary() {
-  const { survey, userAnswers } = useContext(SurveyContext);
+  const { survey, userAnswers, restartAnswers } = useContext(SurveyContext);
   const { tokenBalance, getTokenBalance } = useContext(ContractContext);
   const { questions } = survey;
   const {
@@ -30,6 +30,7 @@ function AnswersSummary() {
         const actualTokenBalance = await getTokenBalance();
         if (prevTokenBalance !== actualTokenBalance) {
           clearInterval(intervalBalance);
+          restartAnswers();
         }
       }, 5000);
     }

@@ -8,6 +8,7 @@ type ContractProps = {
   getTokenBalance: Function;
   cooldownTime: Date | undefined;
   calculateCooldownTime: Function;
+  isCooldownTime: boolean;
 };
 
 const initialState: ContractProps = {
@@ -15,13 +16,14 @@ const initialState: ContractProps = {
   getTokenBalance: () => {},
   cooldownTime: undefined,
   calculateCooldownTime: () => {},
+  isCooldownTime: false,
 };
 
 const ContractContext = createContext(initialState);
 
 function ContractProvider({ children }: { children: ReactNode }) {
   const { tokenBalance, getTokenBalance } = useTokenBalance();
-  const { cooldownTime, calculateCooldownTime } = useCooldownTime();
+  const { cooldownTime, isCooldownTime, calculateCooldownTime } = useCooldownTime();
 
   return (
     <ContractContext.Provider
@@ -30,6 +32,7 @@ function ContractProvider({ children }: { children: ReactNode }) {
         getTokenBalance,
         cooldownTime,
         calculateCooldownTime,
+        isCooldownTime,
       }}
     >
       {children}

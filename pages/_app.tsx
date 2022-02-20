@@ -6,13 +6,16 @@ import { ContractProvider } from '../contexts/ContractContext';
 import { SurveyProvider } from '../contexts/SurveyContext';
 
 import moralisConfig from '../config/moralisConfig';
+import NavigationBar from '../components/navigation/NavigationBar';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <MoralisProvider appId={moralisConfig.appId} serverUrl={moralisConfig.serverUrl}>
       <ContractProvider>
         <SurveyProvider>
-          <Component {...pageProps} />
+          <NavigationBar>
+            <Component {...pageProps} />
+          </NavigationBar>
         </SurveyProvider>
       </ContractProvider>
     </MoralisProvider>
