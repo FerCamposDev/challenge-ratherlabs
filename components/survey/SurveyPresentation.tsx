@@ -10,7 +10,7 @@ import { ContractContext } from '../../contexts/ContractContext';
 
 export default function SurveyPresentation() {
   const { survey, setUserAnswers, userAnswers } = useContext(SurveyContext);
-  const { cooldownTime, calculateCooldownTime, isCooldownTime } = useContext(ContractContext);
+  const { cooldownTime, refreshCooldown, isCooldownTime } = useContext(ContractContext);
 
   const handleStart = () => {
     setUserAnswers({
@@ -21,7 +21,7 @@ export default function SurveyPresentation() {
   };
 
   useEffect(() => {
-    calculateCooldownTime();
+    refreshCooldown();
   }, [userAnswers.status]);
 
   return (

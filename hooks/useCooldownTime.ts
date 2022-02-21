@@ -29,17 +29,14 @@ export default function useCooldownTime() {
   const [cooldownTime, setCooldownTime] = useState<Date>();
   const [isCooldownTime, setIsCooldownTime] = useState(false);
 
-  const calculateCooldownTime = async () => {
+  useEffect(() => {
+    // calculate cooldown time
     if (cooldownSeconds && lastSubmittal) {
       const timestamp = cooldownSeconds + lastSubmittal;
       const cooldownTimeCalculated = new Date(timestamp * 1000);
       setCooldownTime(cooldownTimeCalculated);
       setIsCooldownTime(new Date().getTime() < cooldownTimeCalculated.getTime());
     }
-  };
-
-  useEffect(() => {
-    calculateCooldownTime();
   }, [cooldownSeconds, lastSubmittal]);
 
   useEffect(() => {
@@ -53,7 +50,7 @@ export default function useCooldownTime() {
     }
   }, [cooldownTime, isCooldownTime]);
 
-  useEffect(() => {
+  const refreshCooldown = () => {
     if (account) {
       fetchCooldownSeconds();
       lastSubmittalFetch({
@@ -64,6 +61,10 @@ export default function useCooldownTime() {
         },
       });
     }
+  };
+
+  useEffect(() => {
+    refreshCooldown();
   }, [account]);
 
   useEffect(() => {
@@ -93,7 +94,7 @@ export default function useCooldownTime() {
 
   return {
     cooldownTime,
-    calculateCooldownTime,
+    refreshCooldown,
     isCooldownTime,
   };
 }
