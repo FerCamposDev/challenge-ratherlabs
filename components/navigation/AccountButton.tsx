@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useMoralis, useChain } from 'react-moralis';
 import { Button, Chip, Menu } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import { DEFAULT_CHAIN, DEFAULT_CHAIN_HEX } from '../../config/chainsConfig';
 
@@ -67,7 +68,13 @@ function AccountButton({ userAddress }: { userAddress: string }) {
           {isAuthenticated ? 'Disconnect' : 'Connect'}
         </LoadingButton>
       ) : (
-        <Chip label={userAddress} variant="filled" color="info" onClick={handleClick} />
+        <Chip
+          label={userAddress}
+          variant="filled"
+          color="info"
+          onClick={handleClick}
+          icon={<AccountCircleIcon />}
+        />
       )}
 
       <Menu
