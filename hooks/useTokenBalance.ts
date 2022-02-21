@@ -39,17 +39,6 @@ export default function useTokenBalance() {
     getTokenBalance();
   }, [account]);
 
-  /*  useEffect(() => {
-    if (data) {
-      const balance = formatEther(data as BigNumber);
-      setTokenBalance(balance);
-    }
-  }, [data]); */
-
-  /* useEffect(() => {
-    if (error) { console.log('error', error); }
-  }, [error]); */
-
   return {
     tokenBalance,
     getTokenBalance,
