@@ -1,34 +1,21 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Challenge
 
-First, run the development server:
+- [x] Connect Metamask wallet
+- [x] Ensure user is connected to ropsten, if not show a button to switch networks automatically.
+- [x] Show balance of $QUIZ token (address below).
+- [x] Once the page is loaded, present the title of the daily trivia with its picture and a button that allows you to begin answering.
+- [x] Once the survey starts, display the current question, which will be available for the amount of seconds in the lifetimeSeconds property.
+- [x] Answered or not it should move onto the next question.
+- [x] Once all the questions are finished, show an overview with all the answers.
+- [x] Show a button to submit the questions to the validator contract
+- [x] Refresh the balance of $QUIZ
 
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+#### Extra
+- [x] Native balance.
+- [x] Calculate cooldown time.
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+https://challenge-ratherlabs.vercel.app/
